@@ -5,9 +5,38 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /*background-image: url("https://wallpaperaccess.com/full/1282015.jpg");
+  background-repeat: space repeat;*/
+  background-color: #368FB2;
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.border{
+  color: #22283B;
+  background: #f4f4f4;
+  padding: 5px;
+  border: 1px double #e0e0e0;
+  border-radius: 10px;
+}
+.borderGame{
+  border-radius: 50px;
+}
+
+.imgStyle{
+  border-radius: 100px;
+  height: 700px;
+  width: 700px;
+}
+
+.buttonCreate{
+  margin-bottom: 10px;
+  color: #22283B;
+  background: #f4f4f4;
+  padding: 5px;
+  border: 1px double #e0e0e0;
+  border-radius: 10px;
 }

@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 const { Videogame, conn } = require('../../src/db.js');
+var supertest = require('supertest-as-promised')(require('../../index'));
 
 const agent = session(app);
 const videogame = {
@@ -22,3 +23,18 @@ describe('Videogame routes', () => {
     );
   });
 });
+
+
+describe('`/videogames` URI', function() {
+    it('GET responde con un array que no está vacío', function() {
+      // cuando hacemos un request a `/users` recibimos un arreglo vacio
+      return supertest // supertest nos permite hacer y testear requests HTTP
+        .get('/videogames') // hacemos un request HTTP: GET a '/users'
+        .expect(200) // el codigo de status del response
+        .expect('Content-Type', /json/) // podemos testear los headers
+        .expect(function(res) {
+          expect(res.body).to.eql(![]); // testeamos la respuesta con el body
+        });
+    });
+
+  });
