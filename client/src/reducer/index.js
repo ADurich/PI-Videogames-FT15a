@@ -1,8 +1,10 @@
+import Home from "../components/Home";
+
 
 const initialState = {
     videogames:[],
     allVideogames: [],
-    genres:[],
+    genres: [],
     details: [],
 
 
@@ -33,15 +35,22 @@ function rootReducer(state = initialState, action) {
             }    
 
         case "GET_GENRES":
+            const myGenresFrom=action.payload;
+            const myGenres= myGenresFrom.map((el)=>{
+                return el.name;
+            })
+
             return{
                 ...state,
-                genres:action.payload
-            }  
+                genres:myGenres,
+
+            } 
+             
         case "FILTER_BY_GENRE":
 
                     const myVideogames = state.allVideogames
 
-                    const videogamesFiltered= action.payload === 'all' ? myVideogames : myVideogames.filter(el=> el.genres.includes(action.payload))
+                    const videogamesFiltered= action.payload === 'all' ? myVideogames : myVideogames.filter(el=> (el.genres.map(el=>{return el.name})).includes(action.payload))
 
                     return {                                        
                         ...state,
@@ -50,7 +59,7 @@ function rootReducer(state = initialState, action) {
 
         case 'ORDER_BY_NAME':
                 let orderName = action.payload === 'asc' ?
-                    state.allVideogames.sort(function (a, b) {
+                    state.videogames.sort(function (a, b) {
                         if (a.name > b.name) {
                             return 1;
                         }
@@ -59,7 +68,7 @@ function rootReducer(state = initialState, action) {
                         }
                         return 0;
                     }) :
-                    state.allVideogames.sort(function (a, b) {
+                    state.videogames.sort(function (a, b) {
                         if (a.name > b.name) {
                             return -1;
                         }
@@ -73,8 +82,9 @@ function rootReducer(state = initialState, action) {
                     videogames: orderName,
                 }
         case "FILTER_CREATED":
-                        const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => el.createdAt) : state.allVideogames.filter(el => !el.createdAt)
-                        return {
+                        //const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => !el.img||!el.img.includes('https://media.rawg.io/media/games')) : state.allVideogames.filter(el => )
+                        const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => el.description!=='descripcion') : state.allVideogames.filter(el => el.description==='descripcion')
+                        return {                                                                              
                             ...state,
                             videogames: action.payload === 'all' ? state.allVideogames : orderCreated
                             

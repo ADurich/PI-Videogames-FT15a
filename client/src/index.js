@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";// importo el provider
 import {store} from "./store";// importo el store
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'animate.css/animate.min.css'
+
 
 ReactDOM.render(
   <Provider store={store}>

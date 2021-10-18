@@ -7,6 +7,7 @@ import { getVideogames,getGenres,filterVideogamessByGenre,orderByName,filterCrea
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
+import axios from "axios";
 
 
 
@@ -22,6 +23,7 @@ export default function Home() {
 //-------------------------------------------------------------
 
      const allVideogames=useSelector((state)=> state.videogames);
+     console.log("mis juegos", allVideogames);
      const allGenres=useSelector((state)=> state.genres);
      const [currentPage,setCurrentPage] = useState(1);
      const [videogamesPerPage,setVideogamesPerPage]= useState(9);
@@ -34,22 +36,18 @@ export default function Home() {
     const handleFilterGenre = (e) => {
       dispatch(filterVideogamessByGenre(e.target.value)); 
   }; 
-  console.log("state: ",allVideogames);
-  console.log("página: ",currentPage);
 
 //-------------------------------------------------------------
 
-  function handleSort (e){
-    e.preventDefault();
-    dispatch(orderByName(e.target.value)) 
-    console.log("state: ",allVideogames);
-
+  const handleSort = (e) => {
+    dispatch(orderByName(e.target.value)); 
   };
+
 
 //-------------------------------------------------------------
 
   const handleFilterCreated = (e) => {
-    dispatch(filterCreated(e.target.value)); //se ejecuta este dispatch con el value como parámetro
+    dispatch(filterCreated(e.target.value)); 
   };
 
 //-------------------------------------------------------------
@@ -61,17 +59,17 @@ export default function Home() {
 
   return (
 
-      <div className="divHome">
+      <div>
       {/*----------------CREAR PERSONAJE----------------------------*/}
-          <Link to="/CreateVideogame"><button className="buttonCreate">Crear Personaje</button></Link>
+          <Link to="/CreateVideogame"><button className="btn btn-outline-secondary rounded-0">Crear Personaje</button></Link>
 
       {/*----------------SEARCHBAR------------------------------*/}    
 
           <SearchBar />
 
-      {/*----------------CATEGORIAS------------------------------------*/}    
+      {/*----------------GÉNEROS------------------------------------*/}    
 
-          <h4>Categorías</h4>
+          <h4>Géneros</h4>
           <div>
             <select className="border" onChange={e => handleFilterGenre(e)}> 
               <option value="all">Todos</option>        
@@ -94,7 +92,6 @@ export default function Home() {
             </select>
             <span className="border"><Link to={"/Home"}>Ir</Link></span>
           </div>
-
       {/*-----------------CREADOS----------------------------------*/}    
 
           <h4>Videojuegos</h4>
@@ -116,15 +113,21 @@ export default function Home() {
 
       {/*----------------CARDS-----------------------------------*/}
 
-         {currentVidegames.map((el) => { 
-          return (
-          <fragment>
-            <Link to={"/DetailGames/" + el.id}>
-              <Card name={el.name} image={el.img} id={el.id} key={el.id} />             
-            </Link>
-          </fragment>
-         );
-         })}
+         
+          <div className="container d-flex justify-content-center align-items-center h-100">
+            <div className="row">
+              {currentVidegames.map((el) => { 
+                return (
+                  <div className="col-md-4">
+                    <Link to={"/DetailGames/" + el.id}>
+                      <Card name={el.name} image={el.img} id={el.id} key={el.id} />             
+                    </Link>
+                  </div> 
+              ); 
+              })}          
+            </div>         
+          </div>
+    
 
       </div>
   );

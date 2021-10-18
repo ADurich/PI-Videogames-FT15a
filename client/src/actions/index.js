@@ -35,9 +35,8 @@ export function postVideogame(newVideogame){
 
 export function getGenres(){
   return async function(dispatch){
-    var genreNames=await axios("http://localhost:3001/genres",{
+    var genreNames=await axios("http://localhost:3001/genres"); 
 
-    })
     return dispatch({type:"GET_GENRES",payload:genreNames.data});
   };
 }

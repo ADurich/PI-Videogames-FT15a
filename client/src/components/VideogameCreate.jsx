@@ -1,18 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {postVideogame} from '../actions/index'
-import { useDispatch} from "react-redux";
+import {postVideogame,getGenres} from '../actions/index'
+import { useDispatch, useSelector} from "react-redux";
+import "../index.css";
 
 
 export default function VideogameCreate(){
 
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+       dispatch(getGenres()); 
+   }, []);
+
+	const allGenres=useSelector((state)=> state.genres);
     const [error,setError] = useState({});
     const [newVideogame,setNewVideogame] = useState({
         name: "",
         description: "",
         platforms:[],
-        genre:[]
+        genre:[],
+        img:""
     })
 
 //-------------------------------------------------------------
@@ -24,7 +32,11 @@ export default function VideogameCreate(){
     } else{
     	if (!input.description) {
       errors.description = 'Poner una descripcion';
-    } 
+    } else{
+    	if(!input.img){
+    		errors.img="Poner una imágen"
+    	}
+    }
     }
   
     return errors;
@@ -49,11 +61,20 @@ function handleCheck(e){
     if (e.target.checked){
         setNewVideogame({
             ...newVideogame,
-            [e.target.name]: e.target.value 
+            platforms: [...newVideogame.platforms,e.target.value] 
         })
     }
 }
 
+function handleCheckGenre(e){
+    if (e.target.checked){
+        setNewVideogame({
+            ...newVideogame,
+            genre: [...newVideogame.genre,e.target.value]
+             
+        })
+    }
+}
 //-------------------------------------------------------------
 
 function handleSubmit(e){
@@ -70,7 +91,8 @@ function handleSubmit(e){
         name: "",
         description: "",
         genre:[],
-        platforms:[] 
+        platforms:[],
+        img:"" 
     })
     
 }
@@ -110,6 +132,19 @@ function handleSubmit(e){
 	                        <p className='error'>{error.description}</p>
 	                        )}  
 	                </div>
+	                <div>
+	                    <label>Imágen:</label>
+	                    <input
+	                    className="border"
+	                    type= "text"
+	                    value= {newVideogame.img}
+	                    name= "img"
+	                    onChange={(e)=>handleChange(e)} 
+	                    />
+	                    {error.img && (
+	                        <p className='error'>{error.img}</p>
+	                        )}  
+	                </div>
 	                
 	            {/*----------------SELECT------------------------------------*/}
 
@@ -139,32 +174,23 @@ function handleSubmit(e){
 
 	                </div>
 
-                {/*----------------------------------------------------*/}
+                {/*----------------GÉNEROS----------------------------*/}
 	                
 	                <div>
 	                    <label>Géneros</label>
-	                    <label><input
-	                    className="border"
-	                    type="checkbox"
-	                    name="genre"
-	                    value= "Accion"
-	                    onChange={(e)=>handleCheck(e)} 
-	                    />Accion</label>
-
-	                     <label><input
-	                    type="checkbox"
-	                    name="genre"
-	                    value= "Aventura"
-	                    onChange={(e)=>handleCheck(e)}
-	                    />Aventura</label>
-
-	                   <label><input
-	                    type="checkbox"
-	                    name="genre"
-	                    value= "Shooter"
-	                    onChange={(e)=>handleCheck(e)} 
-	                    />Shooter</label>
+	                    {allGenres.map((el) => { 
+			                    return (
+			                        <label><input
+					                    className="border"
+					                    type="checkbox"
+					                    name="genre"
+					                    value={el}
+					                    onChange={(e)=>handleCheckGenre(e)} 
+		                    		/>{el}</label>                  
+			                   );
+			              })}
 	                </div>	
+
 
 	            {/*----------------------------------------------------*/}
 
