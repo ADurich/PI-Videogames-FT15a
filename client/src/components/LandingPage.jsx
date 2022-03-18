@@ -4,8 +4,6 @@ import {Link} from "react-router-dom";
 
 export default function LandingPage(){ 
 
-let url="hola"
-	  console.log((url.match(/\.(jpg|jpeg|gif|png)$/) != null));
 
 	return( 
 
