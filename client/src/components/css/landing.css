@@ -3,15 +3,26 @@ body, html{
 	padding: 0;
 	margin: 0;
 }
-
+/*
 body{
 	background: linear-gradient(rgba(95,114,90, .8), rgba(155,35,234, .7)),url("https://steamuserimages-a.akamaihd.net/ugc/916918214160222409/D648CE0F94C05BEAEB961F6DAD79D059D7A3670D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false");
 	background-size: cover;
 	background-position: center;
 	color: #fff;
 }
-
+*/
 .logo{
 	height: 40px;
 	margin-top: 20px;
 }
+
+/*.backgroun{
+	background: linear-gradient(
+    180deg,
+    rgba(238,44,65,1) 0%,
+    rgba(199,69,64,1) 15%,
+    rgba(128,19,54,1) 30%,
+    rgba(81,10,50,1) 45%,
+    rgba(45,20,44,1) 100%
+    );
+}*/

@@ -15,13 +15,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.border{
+/*.border{
   color: #22283B;
   background: #f4f4f4;
   padding: 5px;
   border: 1px double #e0e0e0;
   border-radius: 10px;
-}
+}*/
 .borderGame{
   border-radius: 50px;
 }
@@ -40,3 +40,14 @@ code {
   border: 1px double #e0e0e0;
   border-radius: 10px;
 }
+.background{
+  background: linear-gradient(
+    180deg,
+    rgba(238,44,65,1) 0%,
+    rgba(199,69,64,1) 15%,
+    rgba(128,19,54,1) 30%,
+    rgba(81,10,50,1) 45%,
+    rgba(45,20,44,1) 100%
+    );
+}
+

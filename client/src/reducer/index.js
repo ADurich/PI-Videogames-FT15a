@@ -6,6 +6,7 @@ const initialState = {
     allVideogames: [],
     genres: [],
     details: [],
+    platforms: [],
 
 
 };
@@ -83,7 +84,7 @@ function rootReducer(state = initialState, action) {
                 }
         case "FILTER_CREATED":
                         //const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => !el.img||!el.img.includes('https://media.rawg.io/media/games')) : state.allVideogames.filter(el => )
-                        const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => el.description!=='descripcion') : state.allVideogames.filter(el => el.description==='descripcion')
+                        const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => el.description!=='Descripcion api') : state.allVideogames.filter(el => el.description==='Descripcion api')
                         return {                                                                              
                             ...state,
                             videogames: action.payload === 'all' ? state.allVideogames : orderCreated
@@ -95,6 +96,15 @@ function rootReducer(state = initialState, action) {
                     details:action.payload
 
                 }
+
+        case "GET_PLATFORMS":
+            const myPlatformsFrom=action.payload;
+
+            return{
+                ...state,
+                platforms:myPlatformsFrom,
+
+            }        
 
 
     	default:

@@ -5,10 +5,16 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames,getGenres,filterVideogamessByGenre,orderByName,filterCreated } from "../actions/index";
 import Card from "./Card";
+//import Cards from "./Cards";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
+import Genre from "./Genre";
+import Order from "./Order";
+import Base from "./Base";
 import axios from "axios";
-
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
 
 export default function Home() {
@@ -33,76 +39,25 @@ export default function Home() {
 
 //-------------------------------------------------------------
 
-    const handleFilterGenre = (e) => {
-      dispatch(filterVideogamessByGenre(e.target.value)); 
-  }; 
-
-//-------------------------------------------------------------
-
-  const handleSort = (e) => {
-    dispatch(orderByName(e.target.value)); 
-  };
-
-
-//-------------------------------------------------------------
-
-  const handleFilterCreated = (e) => {
-    dispatch(filterCreated(e.target.value)); 
-  };
-
-//-------------------------------------------------------------
 
   const paginado = (pageNumber) => {
     
     setCurrentPage(pageNumber);
+
   }; 
 
   return (
 
-      <div>
-      {/*----------------CREAR PERSONAJE----------------------------*/}
-          <Link to="/CreateVideogame"><button className="btn btn-outline-secondary rounded-0">Crear Personaje</button></Link>
+      <div>   
 
       {/*----------------SEARCHBAR------------------------------*/}    
-
-          <SearchBar />
-
+          <SearchBar />      
       {/*----------------GÉNEROS------------------------------------*/}    
-
-          <h4>Géneros</h4>
-          <div>
-            <select className="border" onChange={e => handleFilterGenre(e)}> 
-              <option value="all">Todos</option>        
-              {allGenres.map((el) => { 
-                    return (
-                          <option value={el}>{el}</option>                
-                   );
-              })}
-            </select>
-
-          </div>
-
-      {/*------------------ORDENAR---------------------------------*/}    
-
-          <h4>Orden</h4>
-          <div>
-            <select className="border" onChange={e => handleSort(e)} >
-                <option value="asc">Ascendente</option>
-                <option value="desc">Descendente</option>
-            </select>
-            <span className="border"><Link to={"/Home"}>Ir</Link></span>
-          </div>
+          <Genre />
+      {/*------------------ORDENAR---------------------------------*/}  
+          <Order />  
       {/*-----------------CREADOS----------------------------------*/}    
-
-          <h4>Videojuegos</h4>
-          <div>
-            <select className="border" onChange={e => handleFilterCreated(e)} > 
-                <option value="all">Todos</option>
-                <option value="created">Creados</option>
-                <option value="api">de api</option>
-            </select>
-          </div>  
-
+          <Base />
       {/*---------------PAGINADO-------------------------------------*/}    
 
           <Paginado 
@@ -110,24 +65,28 @@ export default function Home() {
             allVideogames={allVideogames.length} 
             paginado={paginado}
           />
+      {/*----------------CREAR PERSONAJE----------------------------*/}    
+          <Link id="avv" to="/CreateVideogame"><Button sx={{mt:1,mb:3}} variant="contained" color="secondary">Crear videojuego</Button></Link>    
 
       {/*----------------CARDS-----------------------------------*/}
 
-         
-          <div className="container d-flex justify-content-center align-items-center h-100">
-            <div className="row">
-              {currentVidegames.map((el) => { 
-                return (
-                  <div className="col-md-4">
-                    <Link to={"/DetailGames/" + el.id}>
-                      <Card name={el.name} image={el.img} id={el.id} key={el.id} />             
-                    </Link>
-                  </div> 
-              ); 
-              })}          
-            </div>         
-          </div>
+          <section id="my-cards">
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                  {currentVidegames.map((el) => { 
+                      return (
+                        <Grid item xs={4}>
+                          <Link to={"/DetailGames/" + el.id}>
+                            <Card name={el.name} image={el.img} id={el.id} key={el.id} />             
+                          </Link>
+                        </Grid> 
+                    ); 
+                  })}
+                </Grid>
+              </Box>
+          </section>
     
+         
 
       </div>
   );

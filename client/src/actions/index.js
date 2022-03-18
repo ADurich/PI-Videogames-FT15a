@@ -77,3 +77,11 @@ export function getDetail(id){
   }
   }
 }
+
+export function getPlatforms(){
+  return async function(dispatch){
+    var platformsNames=await axios("http://localhost:3001/platforms"); 
+
+    return dispatch({type:"GET_PLATFORMS",payload:platformsNames.data});
+  };
+}

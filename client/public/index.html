@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="./aver.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -24,11 +26,15 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+    <link rel="stylesheet"href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -39,5 +45,261 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+     
   </body>
 </html>
+<!-- 
+
+export default function VideogameCreate(){
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+       dispatch(getGenres()); 
+       dispatch(getPlatforms()); 
+   }, []);
+
+  const allGenres=useSelector((state)=> state.genres);
+  const allPlatforms=useSelector((state)=> state.platforms);
+    const [error,setError] = useState({});
+    const [newVideogame,setNewVideogame] = useState({
+        name: "",
+        description: "",
+        platforms:[],
+        genre:[],
+        img:"",
+        img2:""
+    })
+    const [baseImage, setBaseImage] = useState("");
+
+//-------------------------------------------------------------
+    async function validate(input) {
+
+    let errors = {};
+
+    if (!input.name) {
+      errors.name = 'Poner un nombre';
+      //console.log(errors.name)
+      
+    } 
+    if (!input.description) {
+      errors.description = 'Poner una descripcion';
+      //console.log("descripción")
+    }
+    if(!input.img){
+        errors.img="Poner una imágen";
+        //console.log("imagen")
+      }else{
+        if((input.img.match(/\.(jpg|jpeg|gif|png)$/) != null)){
+          //console.log("esto es una imagen")
+        }else{
+          //console.log("esto no es una imagen")
+        }
+      }
+    return errors;
+  };
+/*
+let url="hola.jpg"
+    if (typeof url !== 'string') console.log(false);
+    console.log((url.match(/\.(jpg|jpeg|gif|png)$/) != null));*/
+
+//-------------------------------------------------------------
+  /*async function handleImage(e){
+    
+    const file = e.target.files[0];
+      const base64 = await convertBase64(file);
+      setBaseImage(base64);
+
+      setNewVideogame({
+      ...newVideogame,
+      [e.target.name]: base64
+    })
+    const file = e.target.files[0];
+    setNewVideogame({
+      ...newVideogame,
+      [e.target.name]: file
+    })
+  }*/
+
+  /*const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };*/
+  
+    function handleChange(e){
+       setNewVideogame({
+           ...newVideogame,
+           [e.target.name] : e.target.value
+       })
+
+       /*setError(validate({
+        ...newVideogame,
+        [e.target.name]: e.target.value 
+      }));*/
+   }
+
+  /* function handleCheckImg(e){
+    
+       setNewVideogame({
+           ...newVideogame,
+           [e.target.name] : e.target.files[0].name,
+       })
+
+      console.log(newVideogame.img2)
+   }*/
+
+//-------------------------------------------------------------
+
+function handleCheck(e){
+    if (e.target.checked){
+        setNewVideogame({
+            ...newVideogame,
+            platforms: [...newVideogame.platforms,e.target.value] 
+        })
+    }
+}
+
+function handleCheckGenre(e){
+    if (e.target.checked){
+        setNewVideogame({
+            ...newVideogame,
+            genre: [...newVideogame.genre,e.target.value]
+             
+        })
+    }
+}
+//-------------------------------------------------------------
+
+function handleSubmit(e){
+    e.preventDefault();
+    /*setError(validate({ //
+        ...newVideogame,
+        [e.target.name]:e.target.value
+    }));*/
+    console.log(newVideogame)
+
+    dispatch(postVideogame(newVideogame));
+
+    alert("Videojuego creado");
+    setNewVideogame({
+        name: "",
+        description: "",
+        genre:[],
+        platforms:[],
+        img:"",
+        img2:"" 
+    })
+    
+}
+
+  return(
+
+      <div>   
+              <h1>Crear videojuego</h1>
+              {/*console.log(newVideogame)*/}
+              <form onSubmit={(e)=>handleSubmit(e)}> 
+
+          {/*----------------INPUT------------------------------------*/}
+
+                  <div>
+                      <label>Nombre:</label>
+                      <input
+                      className="border"
+                      type= "text"
+                      value= {newVideogame.name}
+                      name= "name"
+                      onChange={(e)=>handleChange(e)} 
+                      />
+                      {error.name && (
+                          <p className='error'>{console.log("dame un nombre")}</p>
+                          )}  
+                  </div>
+                  <div>
+                      <label>Descripción:</label>
+                      <input
+                      className="border"
+                      type= "text"
+                      value= {newVideogame.description}
+                      name= "description"
+                      onChange={(e)=>handleChange(e)} 
+                      />
+                       {error.description && (
+                          <p className='error'>{error.description}</p>
+                          )}  
+                  </div>
+                  <div>
+                      <label>Imágen:</label>
+                      <input
+                      className="border"
+                      type= "text"
+                      value= {newVideogame.img}
+                      name= "img"
+                      onChange={(e)=>handleChange(e)} 
+                      />
+                      {error.img && (
+                          <p className='error'>{error.img}</p>
+                          )}  
+                  </div>
+                  
+              {/*----------------SELECT------------------------------------*/}
+
+                  <div>
+                      <label>Plataformas</label>
+                      {allPlatforms.map((el) => { 
+                          return (
+                              <label><input
+                              className="border"
+                              type="checkbox"
+                              name="platforms"
+                              value={el}
+                              onChange={(e)=>handleCheck(e)} 
+                            />{el}</label>                  
+                         );
+                    })}
+                  </div>
+
+                {/*----------------GÉNEROS----------------------------*/}
+                  
+                  <div>
+                      <label>Géneros</label>
+                      {allGenres.map((el) => { 
+                          return (
+                              <label><input
+                              className="border"
+                              type="checkbox"
+                              name="genre"
+                              value={el}
+                              onChange={(e)=>handleCheckGenre(e)} 
+                            />{el}</label>                  
+                         );
+                    })}
+                  </div>  
+
+              {/*----------------------------------------------------*/}
+
+                  <br/>
+                  <button className="border" type='submit'>Crear Personaje</button>
+              </form>
+
+              <Link to= '/home'>
+                <button className="border">Volver</button>
+            </Link>  
+
+            
+
+            </div>
+    )
+
+  }
+
+-->
