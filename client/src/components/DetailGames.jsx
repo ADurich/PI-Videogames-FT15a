@@ -12,7 +12,6 @@ import { CardActionArea } from '@mui/material';
   2_especificar que hablo de generos y plataformas
 */
 export default function DetailGames({match}){
-console.log(match.params.id);
 const dispatch = useDispatch()
 
  useEffect(() => {
@@ -25,26 +24,30 @@ return (
     <div>
         {myVideogame.map((el) => { 
           return (
-                <Card sx={{ maxWidth: 345, mx: "auto"}}>
+                <Card sx={{mx: "auto"}} key={el.id} >
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       image={el.img}
                       alt="image not found"
+                      sx={{maxWidth:300,maxHeight:300, mx:"auto"}}
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {el.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      {/*<Typography variant="body2" color="text.secondary">
                         {el.genres.map((el)=>{return el.name+' '})}
+                      </Typography>*/}
+                      <Typography variant="body2" color="text.secondary">
+                        {el.genres.map((el)=>{return el+' '})}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {el.platforms.map((el)=>{return el+ ', '})}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      {/*<Typography variant="body2" color="text.secondary">
                         {el.description}
-                      </Typography>
+                      </Typography>*/}
                     </CardContent>
                   </CardActionArea>
                 </Card>

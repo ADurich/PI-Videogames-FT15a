@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenres,filterVideogamessByGenre} from "../actions/index";
 import InputLabel from '@mui/material/InputLabel';
@@ -41,7 +41,7 @@ export default function Genre(){
 	          <MenuItem value={"all"}>Todos</MenuItem>
 	          {allGenres.map((el) => { 
                     return (
-                          <MenuItem value={el}>{el}</MenuItem>                
+                          <MenuItem value={el} key={el}>{el}</MenuItem>                
                    );
               })}
 	        </Select>

@@ -1,6 +1,5 @@
 import React from "react";
 import "./css/card.css"
-import PropTypes from 'prop-types'
 
 export default function Card({ name, image, id}) {
 

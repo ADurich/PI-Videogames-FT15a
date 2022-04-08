@@ -22,12 +22,12 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-/*
+
 const infoFromApi=async()=>{
 
 	var infoUrl;
 	var apiInfo;
-	var apiInfoTotal=[];
+	//var apiInfoTotal=[];
 
 	for(let i=1;i<=1;i++){ 
 
@@ -43,12 +43,14 @@ const infoFromApi=async()=>{
 					}					
 	});
 		
-		apiInfoTotal=apiInfoTotal.concat(apiInfo);
+		//apiInfoTotal=apiInfoTotal.concat(apiInfo);
 	}
 
-	return apiInfoTotal;
+	return apiInfo;
 };
-*/
+
+
+
 
 router.get('/apidb',async(req,res)=>{
 
@@ -92,7 +94,7 @@ router.get('/apidb',async(req,res)=>{
 	
 })
 
-const infoFromDb=async()=>{
+/*const infoFromDb=async()=>{
 	return await Videogame.findAll({
 		include:{ //incluime el modelo género. 
 			model:Genre,
@@ -103,18 +105,20 @@ const infoFromDb=async()=>{
 
 		}
 	})
-}
+}*/
 
-const getAllCharacters=async()=>{
+/*const getAllCharacters=async()=>{
 	//await infoFromApi();
 	const dbInfo=await infoFromDb();
 	//const infoTotal=apiInfo.concat(dbInfo);
 	return dbInfo;
-}
+}*/
 
 router.get('/videogames',async(req,res)=>{
 	const name=req.query.name
-	let videogamesList=await getAllCharacters();
+	//let videogamesList=await getAllCharacters();
+	let videogamesList=await infoFromApi();
+
 	if(name){
 		let videogameName=await videogamesList.filter(el=>el.name.toLowerCase().includes(name.toLowerCase()));
 		videogameName.length ?
@@ -192,7 +196,8 @@ router.post('/videogame',async(req,res)=>{
 
 router.get('/videogame/:id',async(req,res)=>{
 	const id=req.params.id;
-	const videogamesList=await getAllCharacters();
+	//const videogamesList=await getAllCharacters();
+	const videogamesList=await infoFromApi();
 	
 		let videogameId=await videogamesList.filter(el=>el.id==id);
 		videogameId.length?

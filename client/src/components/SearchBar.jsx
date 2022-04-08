@@ -12,7 +12,6 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -83,10 +82,8 @@ export default function SearchBar (){
                     Henry Games
                   </Typography>
                   <Search>
-                    <IconButton aria-label="delete">
-                        <SearchIcon
-                            onClick={(e) => handleSubmit(e)}
-                         />
+                    <IconButton aria-label="delete" onClick={(e) => handleSubmit(e)} >
+                        <SearchIcon/>
                     </IconButton>
                     <StyledInputBase
                       placeholder="Search…"

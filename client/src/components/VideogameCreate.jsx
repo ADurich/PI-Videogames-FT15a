@@ -3,17 +3,13 @@ import {postVideogame,getGenres,getPlatforms} from '../actions/index'
 import { useDispatch, useSelector} from "react-redux";
 import "../index.css";
 import "./css/form.css" //poner esto en app.js
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -49,7 +45,7 @@ export default function VideogameCreate(){
 
 	const allGenres=useSelector((state)=> state.genres);
 	const allPlatforms=useSelector((state)=> state.platforms);
-    const [error,setError] = useState({});
+    //const [error,setError] = useState({});
     const [newVideogame,setNewVideogame] = useState({
         name: "",
         description: "",
@@ -58,10 +54,10 @@ export default function VideogameCreate(){
         img:"",
         img2:""
     })
-    const [baseImage, setBaseImage] = useState("");
+    //const [baseImage, setBaseImage] = useState("");
 	
 //-------------------------------------------------------------
-    function validate(input) {
+    /*function validate(input) {
     let errors = {};
 
     if (!input.name) {
@@ -87,7 +83,7 @@ export default function VideogameCreate(){
     	}
     	
     return errors;
-  };
+  };*/
 /*
 let url="hola.jpg"
 	  if (typeof url !== 'string') console.log(false);
@@ -99,10 +95,10 @@ let url="hola.jpg"
            ...newVideogame,
            [e.target.name] : e.target.value
        })
-       setError(validate({
+       /*setError(validate({
         ...newVideogame,
         [e.target.name]: e.target.value 
-      }));
+      }));*/
 
    }
 

@@ -1,5 +1,3 @@
-import Home from "../components/Home";
-
 
 const initialState = {
     videogames:[],

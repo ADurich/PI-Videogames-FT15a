@@ -3,15 +3,14 @@ import "../index.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames,getGenres,filterVideogamessByGenre,orderByName,filterCreated } from "../actions/index";
+import { getVideogames,getGenres } from "../actions/index";
 import Card from "./Card";
 //import Cards from "./Cards";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
-import Genre from "./Genre";
+import Genre from "./Genre";  
 import Order from "./Order";
 import Base from "./Base";
-import axios from "axios";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -29,8 +28,6 @@ export default function Home() {
 //-------------------------------------------------------------
 
      const allVideogames=useSelector((state)=> state.videogames);
-     console.log("mis juegos", allVideogames);
-     const allGenres=useSelector((state)=> state.genres);
      const [currentPage,setCurrentPage] = useState(1);
      const [videogamesPerPage,setVideogamesPerPage]= useState(9);
      const indexOfLastVideogame = currentPage * videogamesPerPage; 
@@ -75,7 +72,7 @@ export default function Home() {
                 <Grid container spacing={2}>
                   {currentVidegames.map((el) => { 
                       return (
-                        <Grid item xs={4}>
+                        <Grid key={el.id} item xs={4}>
                           <Link to={"/DetailGames/" + el.id}>
                             <Card name={el.name} image={el.img} id={el.id} key={el.id} />             
                           </Link>
