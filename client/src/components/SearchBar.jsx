@@ -61,8 +61,8 @@ export default function SearchBar (){
 
     return (
         <div>           
-            <Box sx={{ flexGrow: 1 }}>
-              <AppBar position="static">
+            <Box sx={{ flexGrow: 1}}>
+              <AppBar id="appbar" position="static">
                 <Toolbar>
                   <IconButton
                     size="large"
@@ -79,7 +79,7 @@ export default function SearchBar (){
                     component="div"
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                   >
-                    Henry Games
+                    Rawg Video Games
                   </Typography>
                   <Search>
                     <IconButton aria-label="delete" onClick={(e) => handleSubmit(e)} >
@@ -98,3 +98,4 @@ export default function SearchBar (){
     )
 
 }
+

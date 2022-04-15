@@ -8,9 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-/*1_ cambiar el maxwidth que quizas con eso no tengo que usar margenes.
-  2_especificar que hablo de generos y plataformas
-*/
+import Button from '@mui/material/Button';
+
 export default function DetailGames({match}){
 const dispatch = useDispatch()
 
@@ -24,25 +23,27 @@ return (
     <div>
         {myVideogame.map((el) => { 
           return (
-                <Card sx={{mx: "auto"}} key={el.id} >
+                <Card sx={{ mx: "auto",maxWidth:500,maxHeight:500}} key={el.id} >
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       image={el.img}
                       alt="image not found"
-                      sx={{maxWidth:300,maxHeight:300, mx:"auto"}}
+                      sx={{mx:"auto",height:312}}
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {el.name}
                       </Typography>
-                      {/*<Typography variant="body2" color="text.secondary">
+                      <Typography variant="body2" color="text.secondary">
+                        <b>Géneros: </b>
                         {el.genres.map((el)=>{return el.name+' '})}
-                      </Typography>*/}
-                      <Typography variant="body2" color="text.secondary">
-                        {el.genres.map((el)=>{return el+' '})}
                       </Typography>
+                      {/*<Typography variant="body2" color="text.secondary">
+                        {el.genres.map((el)=>{return el+' '})}
+                       </Typography>*/}
                       <Typography variant="body2" color="text.secondary">
+                        <b>Plataformas: </b>
                         {el.platforms.map((el)=>{return el+ ', '})}
                       </Typography>
                       {/*<Typography variant="body2" color="text.secondary">
@@ -53,8 +54,9 @@ return (
                 </Card>
          );
          })}
+        
         <Link to= '/home'>
-            <button>Volver</button>
+            <Button variant="contained">Volver</Button>
         </Link>
     </div>
 )

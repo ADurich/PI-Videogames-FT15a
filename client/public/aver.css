@@ -9,22 +9,38 @@
     );
 }*/
 
+
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
 }
 
 html{
     scroll-behavior: smooth;
+    box-shadow: no;
 }
 
 body{
     font-family: 'Roboto', sans-serif;
     margin: 0;
+    background: #ad5389;
+    background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  
+    background: linear-gradient(to right, #3c1053, #ad5389) 
+    !important;
+    background-attachment:fixed !important;
+    position: relative;
+    padding-bottom: 3em;
+    min-height: 160vh;
 }
 
+#appbar{
+    background: #0f0c29; 
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29); 
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); 
 
+}
 
 h1{ font-size: 3.5em;}
 h2{ font-size: 2.7em;}
@@ -51,27 +67,20 @@ button:hover{
 
 
 
-#my-cards{
+/*#my-cards{
     background-color: rgb(30,30,30);
     text-align: center;
-}
+}*/
 
 footer{
-    background-color: rgb(230,230,230);
+    
+    padding: 1em 0;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
-footer p{
-    margin: 0;
-    padding: 12px;
-    color: rgb(100,100,100);
-}
-
-footer .container{
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
 
 @media (min-width: 850px){
 
@@ -85,14 +94,14 @@ footer .container{
 }
 
 #cardcard{
-    margin-right: 150px;
-    margin-left: 150px;
+    /*margin-right: 150px;*/
+    margin-left: 100px;
+    max-width: 400px;
+    max-height: 330px;
+    border-radius: 40px;
 }
 
 a{
  text-decoration: none !important;
 }
 
- /*#root{
- background-color: red;
-}*/

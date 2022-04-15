@@ -51,8 +51,7 @@ export default function VideogameCreate(){
         description: "",
         platforms:[],
         genre:[],
-        img:"",
-        img2:""
+        img:""
     })
     //const [baseImage, setBaseImage] = useState("");
 	
@@ -90,10 +89,10 @@ let url="hola.jpg"
 	  console.log((url.match(/\.(jpg|jpeg|gif|png)$/) != null));*/
 
 //-------------------------------------------------------------
-    function handleChange(e){
+    function handleChange(event){
        setNewVideogame({
            ...newVideogame,
-           [e.target.name] : e.target.value
+           [event.target.name] : event.target.value
        })
        /*setError(validate({
         ...newVideogame,
@@ -141,12 +140,10 @@ const [platform, setPlatform] = React.useState([]);
 	      typeof value === 'string' ? value.split(',') : value,
 	    );
 
-	    if (event.target.checked){
         setNewVideogame({
             ...newVideogame,
-            platforms: [...newVideogame.platforms,event.target.value] 
+            platforms: [...newVideogame.platforms,event.target.value[(event.target.value.length)-1]] 
         })
-    }
 	  };
 
 const [genres, setGenres] = React.useState([]);
@@ -160,13 +157,11 @@ const [genres, setGenres] = React.useState([]);
 	      typeof value === 'string' ? value.split(',') : value,
 	    );
 
-	    if (event.target.checked){
             setNewVideogame({
                 ...newVideogame,
-                genre: [...newVideogame.genre,event.target.value]
+                genre: [...newVideogame.genre,event.target.value[(event.target.value.length)-1]]
                              
-                       })
-                    }
+                       })                  
 	   };	  
 
 
@@ -174,6 +169,7 @@ const [genres, setGenres] = React.useState([]);
 
 const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(newVideogame)
     dispatch(postVideogame(newVideogame));
 
                     alert("Videojuego creado");
@@ -182,9 +178,10 @@ const handleSubmit = (event) => {
                         description: "",
                         genre:[],
                         platforms:[],
-                        img:"",
-                        img2:"" 
-                    })
+                        img:""
+                    });
+                    setPlatform([]);
+                    setGenres([]);
   };
 
 	return(
@@ -300,7 +297,7 @@ const handleSubmit = (event) => {
 	            
 
 	            <Link to= '/home'>
-            		<button className="border">Volver</button>
+            		<Button variant="contained">Volver</Button>
         		</Link>  
          </>   
 		)

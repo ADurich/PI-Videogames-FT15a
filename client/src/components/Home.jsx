@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames,getGenres } from "../actions/index";
 import Card from "./Card";
-//import Cards from "./Cards";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
 import Genre from "./Genre";  
@@ -67,7 +66,7 @@ export default function Home() {
 
       {/*----------------CARDS-----------------------------------*/}
 
-          <section id="my-cards">
+          
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
                   {currentVidegames.map((el) => { 
@@ -80,11 +79,11 @@ export default function Home() {
                     ); 
                   })}
                 </Grid>
-              </Box>
-          </section>
-    
-         
+              </Box> 
 
+              <footer>
+                  &copy; 2022
+              </footer>             
       </div>
   );
 }
@@ -92,4 +91,3 @@ export default function Home() {
 
 
 
-          
