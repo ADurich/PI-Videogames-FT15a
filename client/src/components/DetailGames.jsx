@@ -31,7 +31,7 @@ return (
                       alt="image not found"
                       sx={{mx:"auto",height:312}}
                     />
-                    <CardContent>
+                    <CardContent id="cardContent">
                       <Typography gutterBottom variant="h5" component="div">
                         {el.name}
                       </Typography>

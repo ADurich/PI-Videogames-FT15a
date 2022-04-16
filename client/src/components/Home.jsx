@@ -14,7 +14,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
-
 export default function Home() {
 
    const dispatch = useDispatch();
@@ -66,7 +65,7 @@ export default function Home() {
 
       {/*----------------CARDS-----------------------------------*/}
 
-          
+          {allVideogames.length>0?
               <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
                   {currentVidegames.map((el) => { 
@@ -79,7 +78,8 @@ export default function Home() {
                     ); 
                   })}
                 </Grid>
-              </Box> 
+              </Box>:
+              null} 
 
               <footer>
                   &copy; 2022

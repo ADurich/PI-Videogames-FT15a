@@ -46,18 +46,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchBar (){
-    const dispatch = useDispatch()
-    const [name,setName] = useState("") 
 
-    function handleInputChange(e){
-    e.preventDefault() 
-    setName(e.target.value) 
+    const dispatch = useDispatch() 
+    var name;
+
+      function handleInputChange(e){
+      e.preventDefault() 
+      name=e.target.value
+      dispatch(getNameVideogames(name)) 
     }
 
-    function handleSubmit(e){
+    /*function handleSubmit(e){
         e.preventDefault() 
         dispatch(getNameVideogames(name))
-    }
+    }*/
 
     return (
         <div>           
@@ -82,7 +84,7 @@ export default function SearchBar (){
                     Rawg Video Games
                   </Typography>
                   <Search>
-                    <IconButton aria-label="delete" onClick={(e) => handleSubmit(e)} >
+                    <IconButton aria-label="delete" /*onClick={(e) => handleSubmit(e)} */>
                         <SearchIcon/>
                     </IconButton>
                     <StyledInputBase

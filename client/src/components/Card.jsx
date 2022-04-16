@@ -23,3 +23,4 @@ Card.propTypes={
   image: PropTypes.string,
 }
 */
+

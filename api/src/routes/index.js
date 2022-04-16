@@ -120,10 +120,13 @@ router.get('/videogames',async(req,res)=>{
 	//let videogamesList=await infoFromApi();
 
 	if(name){
-		let videogameName=await videogamesList.filter(el=>el.name.toLowerCase().includes(name.toLowerCase()));
+		let videogameName=await videogamesList.filter(el=>el.name.toLowerCase().startsWith(name.toLowerCase()));
+		/*let videogameName=await videogamesList.filter(el=>el.name.toLowerCase().includes(name.toLowerCase()));*/
 		videogameName.length ?
 		res.status(200).send(videogameName):
-		res.status(404).send("No está el personaje");	
+		videogameName=[];
+		res.status(200).send(videogameName)
+		//res.status(404).send("No está el personaje");	
 	}else{
 		res.status(200).send(videogamesList);
 	}
