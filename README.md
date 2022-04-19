@@ -75,6 +75,9 @@ El contenido de `client` fue creado usando: Create React App.
 - [ ] Redux
 - [ ] Express
 - [ ] Sequelize - Postgres
-# Project Screens 
+# Capturas
 
-![Landing-ecommerce]()
+<img width="90%" src="https://github.com/ADurich/PI-Videogames-FT15a/blob/main/videogamesImages/videogameImage.png" alt="About screen" title="Landing"/>
+<img width="90%" src="https://github.com/ADurich/PI-Videogames-FT15a/blob/main/videogamesImages/videogameImage2.png" alt="About screen" title="Landing"/>
+<img width="90%" src="https://github.com/ADurich/PI-Videogames-FT15a/blob/main/videogamesImages/videogameImage3.png" alt="About screen" title="Landing"/>
+<img width="90%" src="https://github.com/ADurich/PI-Videogames-FT15a/blob/main/videogamesImages/videogameImage4.png" alt="About screen" title="Landing"/>
