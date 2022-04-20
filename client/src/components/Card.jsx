@@ -1,5 +1,4 @@
 import React from "react";
-import "./css/card.css"
 
 export default function Card({ name, image, id}) {
 
@@ -17,10 +16,4 @@ export default function Card({ name, image, id}) {
   );
 }
 
-/*
-Card.propTypes={
-  name:PropTypes.string.isRequired,
-  image: PropTypes.string,
-}
-*/
 

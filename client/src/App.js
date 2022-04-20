@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter,Route,Switch} from "react-router-dom";
-import LandingPage from './components/LandingPage'; //importo LandingPage
-import Home from './components/Home'; //importo Home
+import LandingPage from './components/LandingPage';
+import Home from './components/Home'; 
 import VideogameCreate from './components/VideogameCreate';
 import DetailGames from './components/DetailGames';
 

@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {postVideogame,getGenres,getPlatforms} from '../actions/index'
 import { useDispatch, useSelector} from "react-redux";
-import "../index.css";
-import "./css/form.css" //poner esto en app.js
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+//import Link from '@mui/material/Link';
+import {Link} from "react-router-dom";
 import Box from '@mui/material/Box';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import Typography from '@mui/material/Typography';
@@ -53,79 +52,15 @@ export default function VideogameCreate(){
         genre:[],
         img:""
     })
-    //const [baseImage, setBaseImage] = useState("");
 	
-//-------------------------------------------------------------
-    /*function validate(input) {
-    let errors = {};
-
-    if (!input.name) {
-      errors.name = 'Colocar un nombre';    
-    }else{
-    	if(input.name.length>30){
-    		errors.name="El nombre no puede ser mayor a 30 caracteres"
-    	}
-    } 
-    if (!input.description) {
-      errors.description = 'Colocar una descripcion';
-    }else{
-    	if(input.description.length>50){
-    		errors.description="La descripción no puede ser mayor a 50 caracteres"
-    	}
-    }
-    if(!input.img){
-    		errors.img="Colocar una imágen";
-    	}else{
-    		if(!(input.img.match(/\.(jpg|jpeg|gif|png)$/) != null)){
-    			errors.img="Tiene que ser una imagen"
-    		}
-    	}
-    	
-    return errors;
-  };*/
-/*
-let url="hola.jpg"
-	  if (typeof url !== 'string') console.log(false);
-	  console.log((url.match(/\.(jpg|jpeg|gif|png)$/) != null));*/
 
 //-------------------------------------------------------------
     function handleChange(event){
        setNewVideogame({
            ...newVideogame,
            [event.target.name] : event.target.value
-       })
-       /*setError(validate({
-        ...newVideogame,
-        [e.target.name]: e.target.value 
-      }));*/
-
+       })      
    }
-
-   /*async function handleCheckImg(e){ 	
-       setNewVideogame({
-           ...newVideogame,
-           [e.target.name] : e.target.files[0],
-       }) 
-       const file = e.target.files[0];
-    	const base64 = await convertBase64(file);
-    	setBaseImage(base64);
-    	console.log(base64)
-   }
-
-   const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };*/
 
 //-------------------------------------------------------------
 
@@ -145,7 +80,7 @@ const [platform, setPlatform] = React.useState([]);
             platforms: [...newVideogame.platforms,event.target.value[(event.target.value.length)-1]] 
         })
 	  };
-
+//-------------------------------------------------------------
 const [genres, setGenres] = React.useState([]);
 
 	  const handleCheckGenre = (event) => {

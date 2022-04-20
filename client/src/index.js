@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";// importo el provider
-import {store} from "./store";// importo el store
+import {Provider} from "react-redux";
+import {store} from "./store";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'animate.css/animate.min.css'
 

@@ -21,13 +21,6 @@ export default function Paginado ({videogamesPerPage, allVideogames,paginado}) {
         )
 }
 
-/*{pageNumbers &&
 
-                        pageNumbers.map(number => {
-                            return (
-                                     <a href="#" onClick={(e)=>paginado(number)}>{number}</a>
-                                 )
-                                }
-                     
-                        )
-                    }*/
+
+                    

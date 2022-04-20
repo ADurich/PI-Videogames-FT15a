@@ -17,17 +17,6 @@ export function getNameVideogames(name){
         type:"GET_NAME_VIDEOGAMES",
         payload:jsonName.data
       })
-    
-
-    /*try{
-      var jsonName=await axios.get("http://localhost:3001/videogames?name="+name);
-      return dispatch({
-        type:"GET_NAME_VIDEOGAMES",
-        payload:jsonName.data
-      })
-    }catch(error){
-      console.log(error)
-    }*/
   }
 }
 
