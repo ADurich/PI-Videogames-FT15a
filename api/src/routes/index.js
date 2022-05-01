@@ -1,13 +1,3 @@
-//2_Corregir el ascendente y descendente--NO PUDE
-//9_Los géneros que estoy usando no son los que tienen mis juegos de la api sino que de la primera pág del endflag géneros
-//14_Cuando tengas ganas ver el validador de imágenes para cuando hago un post ponga una url errónea
-//15_Poner una opción en VideogameCreate para traer una imágen local. BÁSICO!
-//16_En videogameCreate hacer un mapeo de las plataformas en vez de poner un par manualmente.
-//17_Repasar los géneros en los get, puede que haya errores
-//18_ Bootstrap: cuando tengo un título que me abarca mas de una fila, utiliza espacio de la imágen y ésta baja
-//19_Me conviene usar fotos que tengo guardadas en una carpeta, más que usar de un enlace externo
-
-
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -21,36 +11,6 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
-
-/*const infoFromApi=async()=>{
-
-	var infoUrl;
-	var apiInfo;
-	//var apiInfoTotal=[];
-
-	for(let i=1;i<=1;i++){ 
-
-		infoUrl=await axios.get(`https://api.rawg.io/api/games?page=${i}&&key=${API_KEY}`)
-		apiInfo=await infoUrl.data.results.map(el=>{
-			
-					return{
-						id: el.id,
-						name: el.name,
-						platforms: el.platforms.map(el=>el.platform.name),	
-						img:el.background_image,
-						genres: el.genres.map(el=>el.name),
-					}					
-	});
-		
-		//apiInfoTotal=apiInfoTotal.concat(apiInfo);
-	}
-
-	return apiInfo;
-};*/
-
-
-
 
 router.get('/apidb',async(req,res)=>{
 
@@ -118,10 +78,36 @@ router.get('/videogames',async(req,res)=>{
 	const name=req.query.name
 	let videogamesList=await getAllCharacters();
 	//let videogamesList=await infoFromApi();
+	var videogameName=[];
+	var joinWords;
+	var separateWords;
+	var checkElement;
+	if(name){	
 
-	if(name){
-		let videogameName=await videogamesList.filter(el=>el.name.toLowerCase().startsWith(name.toLowerCase()));
-		/*let videogameName=await videogamesList.filter(el=>el.name.toLowerCase().includes(name.toLowerCase()));*/
+		videogamesList.map(el=>{
+			joinWords=[];
+			separateWords=el.name.split(" ");
+			separateWords2=separateWords;
+			checkElement=false;
+			for (let i=0; i<separateWords.length; i++) {
+				joinWords.push(separateWords2.join(" "))
+				separateWords2.shift();
+				if(joinWords[i].toLowerCase().startsWith(name.toLowerCase())&&!checkElement){
+					videogameName.push(el)
+					checkElement=true;
+				}
+			}			
+		})
+		
+		videogamesList.map(el=>{
+			el.genres.map(genre=>{
+				if(genre.name.toLowerCase()===name.toLowerCase()){
+					videogameName.push(el)
+				}
+			})
+		})
+
+
 		videogameName.length ?
 		res.status(200).send(videogameName):
 		videogameName=[];
