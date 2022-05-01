@@ -25,6 +25,7 @@ export default function Home() {
 //-------------------------------------------------------------
 
      const allVideogames=useSelector((state)=> state.videogames);
+     console.log(allVideogames)
      const [currentPage,setCurrentPage] = useState(1);
      const [videogamesPerPage,setVideogamesPerPage]= useState(9);
      const indexOfLastVideogame = currentPage * videogamesPerPage; 

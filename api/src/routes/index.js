@@ -81,17 +81,18 @@ router.get('/videogames',async(req,res)=>{
 	var videogameName=[];
 	var joinWords;
 	var separateWords;
+	var separateWords2;
 	var checkElement;
 	if(name){	
 
 		videogamesList.map(el=>{
 			joinWords=[];
 			separateWords=el.name.split(" ");
-			separateWords2=separateWords;
+			separateWords2=separateWords.length;
 			checkElement=false;
-			for (let i=0; i<separateWords.length; i++) {
-				joinWords.push(separateWords2.join(" "))
-				separateWords2.shift();
+			for (let i=0; i<separateWords2; i++) {
+				joinWords.push(separateWords.join(" "))
+				separateWords.shift();
 				if(joinWords[i].toLowerCase().startsWith(name.toLowerCase())&&!checkElement){
 					videogameName.push(el)
 					checkElement=true;
@@ -99,13 +100,14 @@ router.get('/videogames',async(req,res)=>{
 			}			
 		})
 		
+		/*
 		videogamesList.map(el=>{
 			el.genres.map(genre=>{
 				if(genre.name.toLowerCase()===name.toLowerCase()){
 					videogameName.push(el)
 				}
 			})
-		})
+		})*/
 
 
 		videogameName.length ?
