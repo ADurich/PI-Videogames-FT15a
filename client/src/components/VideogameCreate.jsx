@@ -42,7 +42,7 @@ export default function VideogameCreate(){
        dispatch(getPlatforms()); 
    }, []);
 
-	const allGenres=useSelector((state)=> state.genres);
+	const allGenres=useSelector((state)=> state.genresFromApi);
 	const allPlatforms=useSelector((state)=> state.platforms);
     //const [error,setError] = useState({});
     const [newVideogame,setNewVideogame] = useState({

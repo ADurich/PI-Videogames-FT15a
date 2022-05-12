@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import { useDispatch } from "react-redux";
-import { getNameVideogames } from '../actions';
+import { getNameVideogames,getPageNumber } from '../actions';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -31,7 +31,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -44,6 +43,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function SearchBar (){
 
     const dispatch = useDispatch() 
@@ -52,8 +52,11 @@ export default function SearchBar (){
       function handleInputChange(e){
       e.preventDefault() 
       name=e.target.value
-      dispatch(getNameVideogames(name)) 
+      dispatch(getNameVideogames(name))
+      dispatch(getPageNumber(1))
+
     }
+    
 
     /*function handleSubmit(e){
         e.preventDefault() 
@@ -99,4 +102,6 @@ export default function SearchBar (){
     )
 
 }
+
+
 

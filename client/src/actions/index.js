@@ -39,6 +39,14 @@ export function getGenres(){
   };
 }
 
+export function getGenresFromDb(){
+  return async function(dispatch){
+    var genreNamesFromDb=await axios("http://localhost:3001/genresFromDb"); 
+
+    return dispatch({type:"GET_GENRES_FROM_DB",payload:genreNamesFromDb.data});
+  };
+}
+
 export function filterVideogamessByGenre(genre) {     
    return async function(dispatch){
 
@@ -79,7 +87,21 @@ export function getDetail(id){
 export function getPlatforms(){
   return async function(dispatch){
     var platformsNames=await axios("http://localhost:3001/platforms"); 
-
+    
     return dispatch({type:"GET_PLATFORMS",payload:platformsNames.data});
+  };
+}
+
+export function getPageNumber(pageNumber) {     
+   return async function(dispatch){
+
+    return dispatch({type:"GET_PAGE_NUMBER",payload:pageNumber});
+  };
+}
+
+export function getInitialPageNumber(initialPageNumber) {     
+   return async function(dispatch){
+
+    return dispatch({type:"GET_INITIAL_PAGE_NUMBER",payload:initialPageNumber});
   };
 }

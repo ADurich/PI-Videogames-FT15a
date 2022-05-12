@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { orderByName} from "../actions/index";
+import { orderByName,getPageNumber,getInitialPageNumber} from "../actions/index";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -17,6 +17,8 @@ export default function Order(){
     const handleChange = (event: SelectChangeEvent) => {
     	setOrder(event.target.value);
     	dispatch(orderByName(event.target.value));
+    	dispatch(getPageNumber(1))
+    	dispatch(getInitialPageNumber(1))
     };
 
 	const dispatch = useDispatch();
@@ -34,7 +36,6 @@ export default function Order(){
 		          autoWidth
 		          label="Order"
 		        >
-		          <MenuItem value=""><em>Ninguno</em></MenuItem>
 		          <MenuItem value={"asc"}>Ascendente</MenuItem>
 		          <MenuItem value={"desc"}>Descendente</MenuItem>
 		        </Select>

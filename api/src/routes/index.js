@@ -1,6 +1,4 @@
 const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
 const axios= require('axios');
 const {Genre,Videogame}=require('../db');
 
@@ -8,9 +6,6 @@ require('dotenv').config();
 const { API_KEY } = process.env;
 
 const router = Router();
-
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 
 router.get('/apidb',async(req,res)=>{
 
@@ -26,7 +21,8 @@ router.get('/apidb',async(req,res)=>{
 					  name:el.name,
 					  description:'Descripcion api',
 				      platforms:el.platforms.map(el=>el.platform.name),
-				      img:el.background_image
+				      img:el.background_image,
+				      released:el.released,
 				
 				
 					})
@@ -88,26 +84,32 @@ router.get('/videogames',async(req,res)=>{
 		videogamesList.map(el=>{
 			joinWords=[];
 			separateWords=el.name.split(" ");
-			separateWords2=separateWords.length;
+			numberOfWords=separateWords.length;
 			checkElement=false;
-			for (let i=0; i<separateWords2; i++) {
+			let separateDate=el.released.split("-")
+
+			for (let i=0; i<numberOfWords; i++) {
 				joinWords.push(separateWords.join(" "))
 				separateWords.shift();
 				if(joinWords[i].toLowerCase().startsWith(name.toLowerCase())&&!checkElement){
 					videogameName.push(el)
 					checkElement=true;
 				}
-			}			
-		})
-		
-		/*
-		videogamesList.map(el=>{
-			el.genres.map(genre=>{
-				if(genre.name.toLowerCase()===name.toLowerCase()){
+			}
+
+			el.platforms.map(platform=>{
+				if(platform.toLowerCase()===name.toLowerCase()&&!checkElement){
 					videogameName.push(el)
 				}
-			})
-		})*/
+			})	
+
+			if(separateDate[0]===name&&!checkElement){
+				videogameName.push(el)
+			}		
+		})
+
+		
+		
 
 
 		videogameName.length ?
@@ -130,16 +132,24 @@ router.get('/platforms',async(req,res)=>{
 
 router.get('/genres',async (req,res)=> {
     const genreApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
-    const genreNames = genreApi.data.results.map(el => el.name)
+    const genreNames = genreApi.data.results.map(el =>{
+    	return el.name
+    })
 
-    genreNames.forEach(el=>{
+    /*genreNames.forEach(el=>{
     	Genre.findOrCreate({
     		where:{name:el}
     	})
-    })
+    })*/
 
-    const AllGenre=await Genre.findAll();
-    res.send(AllGenre);
+    //const AllGenre=await Genre.findAll();
+    res.send(genreNames);
+})
+
+router.get('/genresFromDb',async (req,res)=> {
+
+    const allGenres=await Genre.findAll();
+    res.send(allGenres);
 })
 
 router.post('/videogame',async(req,res)=>{

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames,getGenres } from "../actions/index";
+import { getVideogames,getGenres,getPageNumber,getInitialPageNumber} from "../actions/index";
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
@@ -19,26 +19,35 @@ export default function Home() {
 
      useEffect(() => {
        dispatch(getVideogames());
-       dispatch(getGenres()); 
    }, []);
 
 //-------------------------------------------------------------
-
      const allVideogames=useSelector((state)=> state.videogames);
-     console.log(allVideogames)
-     const [currentPage,setCurrentPage] = useState(1);
+     var pageNumber=useSelector((state)=> state.pageNumber);
+     //console.log("mis videojuegos",allVideogames) 
+     const [currentPage,setCurrentPage]= useState(1);
      const [videogamesPerPage,setVideogamesPerPage]= useState(9);
-     const indexOfLastVideogame = currentPage * videogamesPerPage; 
+     var indexOfLastVideogame;
+     if(pageNumber===1){
+      indexOfLastVideogame = pageNumber * videogamesPerPage;
+     }else{
+      indexOfLastVideogame = currentPage * videogamesPerPage;
+     }
+
      const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; 
      const currentVidegames = allVideogames.slice(indexOfFirstVideogame,indexOfLastVideogame)
-
+     //console.log("mis actuales videojuegos",currentVidegames)  
+  
 //-------------------------------------------------------------
 
 
-  const paginado = (pageNumber) => {
-    
-    setCurrentPage(pageNumber);
+  const paginado = (page) => {
 
+    if(pageNumber===1){
+      dispatch(getPageNumber(0))
+    }
+    setCurrentPage(page);
+    dispatch(getInitialPageNumber(page))
   }; 
 
   return (
@@ -87,7 +96,6 @@ export default function Home() {
       </div>
   );
 }
-
 
 
 

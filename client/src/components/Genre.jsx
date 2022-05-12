@@ -1,7 +1,7 @@
 import React from "react";
 import {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getGenres,filterVideogamessByGenre} from "../actions/index";
+import { getGenresFromDb,filterVideogamessByGenre,getPageNumber,getInitialPageNumber} from "../actions/index";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -13,13 +13,15 @@ export default function Genre(){
 
     const handleChange = (event: SelectChangeEvent) => {
     	setGenre(event.target.value);
-    	dispatch(filterVideogamessByGenre(event.target.value)); 
+    	dispatch(filterVideogamessByGenre(event.target.value));
+    	dispatch(getPageNumber(1)) ;
+    	dispatch(getInitialPageNumber(1));
     };
 
 	const dispatch = useDispatch();
 
      useEffect(() => {
-       dispatch(getGenres()); 
+       dispatch(getGenresFromDb()); 
    }, []);
 
      const allGenres=useSelector((state)=> state.genres);
@@ -37,7 +39,7 @@ export default function Genre(){
 	          autoWidth
 	          label="Genre"
 	        >
-	          <MenuItem value=""><em>Ninguno</em></MenuItem>
+	          {/*<MenuItem value=""><em>Ninguno</em></MenuItem>*/}
 	          <MenuItem value={"all"}>Todos</MenuItem>
 	          {allGenres.map((el) => { 
                     return (

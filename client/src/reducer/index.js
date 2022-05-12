@@ -3,10 +3,11 @@ const initialState = {
     videogames:[],
     allVideogames: [],
     genres: [],
+    genresFromApi: [],
     details: [],
     platforms: [],
-
-
+    pageNumber:0,
+    initialPageNumber:1,
 };
 
 
@@ -35,7 +36,19 @@ function rootReducer(state = initialState, action) {
 
         case "GET_GENRES":
             const myGenresFrom=action.payload;
-            const myGenres= myGenresFrom.map((el)=>{
+            /*const myGenres= myGenresFrom.map((el)=>{
+                return el.name;
+            })*/
+
+            return{
+                ...state,
+                genresFromApi:myGenresFrom,
+
+            } 
+
+        case "GET_GENRES_FROM_DB":
+            const myGenresFromDB=action.payload;
+            const myGenres= myGenresFromDB.map((el)=>{
                 return el.name;
             })
 
@@ -43,7 +56,7 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 genres:myGenres,
 
-            } 
+            }    
              
         case "FILTER_BY_GENRE":
 
@@ -102,8 +115,19 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 platforms:myPlatformsFrom,
 
-            }        
+            }  
 
+        case 'GET_PAGE_NUMBER':
+            return{
+                ...state, 
+                pageNumber:action.payload, 
+            }
+
+        case 'GET_INITIAL_PAGE_NUMBER':
+            return{
+                ...state, 
+                initialPageNumber:action.payload, 
+            }    
 
     	default:
     		return state;
