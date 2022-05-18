@@ -55,11 +55,16 @@ export function filterVideogamessByGenre(genre) {
 }
 
 
-export function orderByName(orden) {    
-   return async function(dispatch){
+export function getOrder(order){
+  return async function(dispatch){
+    try{
+      var jsonOrder=await axios.get('http://localhost:3001/order/'+order);
+      return dispatch({type:"GET_ORDER",payload:jsonOrder.data})
 
-    return dispatch({type:'ORDER_BY_NAME', payload:orden});
-  };
+    }catch(error){
+    console.log(error)
+  }
+  }
 }
 
 

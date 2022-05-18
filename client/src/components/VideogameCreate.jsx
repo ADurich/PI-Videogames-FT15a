@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {postVideogame,getGenres,getPlatforms} from '../actions/index'
+import {postVideogame,getGenres,getPlatforms,getInitialPageNumber} from '../actions/index'
 import { useDispatch, useSelector} from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -74,7 +74,7 @@ const [platform, setPlatform] = React.useState([]);
 	      // On autofill we get a stringified value.
 	      typeof value === 'string' ? value.split(',') : value,
 	    );
-
+	    console.log(event.target.value)
         setNewVideogame({
             ...newVideogame,
             platforms: [...newVideogame.platforms,event.target.value[(event.target.value.length)-1]] 
@@ -99,6 +99,12 @@ const [genres, setGenres] = React.useState([]);
                        })                  
 	   };	  
 
+
+//-------------------------------------------------------------
+
+function handleChangeInitialPageNumber(){
+	  dispatch(getInitialPageNumber(1))  
+   }
 
 //-------------------------------------------------------------
 
@@ -235,7 +241,7 @@ const handleSubmit = (event) => {
 	            
 
 	            <Link to= '/home'>
-            		<Button variant="contained">Volver</Button>
+            		<Button variant="contained" onClick={handleChangeInitialPageNumber}>Volver</Button>
         		</Link>  
          </>   
 		)

@@ -10,19 +10,25 @@ const router = Router();
 router.get('/apidb',async(req,res)=>{
 
 	var infoUrl;
-
+	var myGame;
+	
 	for(let i=1;i<=1;i++){
 		infoUrl=await axios.get(`https://api.rawg.io/api/games?page=${i}&&key=${API_KEY}`) 
 
 		await infoUrl.data.results.map(async (el)=>{
 
+			let idToString=el.id.toString();
+			myGame=await axios.get(`https://api.rawg.io/api/games/${idToString}?key=${API_KEY}`)
+
+
 			let insertedVideogame = await Videogame.create({
 				
 					  name:el.name,
-					  description:'Descripcion api',
+					  description:myGame.data.description_raw,
 				      platforms:el.platforms.map(el=>el.platform.name),
 				      img:el.background_image,
 				      released:el.released,
+				      source:'api',
 				
 				
 					})
@@ -42,11 +48,13 @@ router.get('/apidb',async(req,res)=>{
 
 			insertedVideogame.addGenre(genreDb);
 
+			contador++;
+
 			});
 
 	}
-	
-	res.status(200).send("pasados los videojuegos de la api a la db");
+
+	res.status(200).send("videojuegos de la api pasados a la base de datos");
 	
 })
 
@@ -109,7 +117,15 @@ router.get('/videogames',async(req,res)=>{
 		})
 
 		
-		
+		/*
+		1-no olvidar el tema del obj que no me funciona y el img no
+		5-traer desde la api primero
+		7-Anotar toda la logica que uso
+		9- en github en pasos a seguir recordar poenr que tiener usar en postman el /apidb
+		10-IMPORTANTE. TODO LO COMENTADO QUEDA ACA PERO NO SE SUBE A GIT SALVO EXCEPCIONES
+		11-ver como funciona el creado de las tablas,las relaciones, sequalize en general.
+		12-ver si puedo corregir en cards lo que estoy repitiendo de home
+		*/
 
 
 		videogameName.length ?
@@ -204,6 +220,39 @@ router.get('/videogame/:id',async(req,res)=>{
 		videogameId.length?
 		res.status(200).send(videogameId):
 		res.status(404).send('No existe este videojuego');
+	
+})
+
+router.get('/order/:name',async(req,res)=>{
+	const name=req.params.name;
+	const videogamesList=await getAllCharacters();
+	var orderedGames;
+
+	if(name.toLowerCase()==='asc'){
+		orderedGames=videogamesList.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return 1;
+                        }
+                        if (b.name > a.name) {
+                            return -1;
+                        }
+                        return 0;
+                    })
+	}else{
+		orderedGames=videogamesList.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return -1;
+                        }
+                        if (b.name > a.name) {
+                            return 1;
+                        }
+                        return 0;
+                    })
+	}
+	
+		orderedGames.length?
+		res.status(200).send(orderedGames):
+		res.status(404).send('No se pudo ordenar los videojuegos');
 	
 })
 

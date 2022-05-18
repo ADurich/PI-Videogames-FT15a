@@ -24,7 +24,8 @@ export default function Home() {
 //-------------------------------------------------------------
      const allVideogames=useSelector((state)=> state.videogames);
      var pageNumber=useSelector((state)=> state.pageNumber);
-     //console.log("mis videojuegos",allVideogames) 
+     console.log("mis videojuegos",allVideogames) 
+
      const [currentPage,setCurrentPage]= useState(1);
      const [videogamesPerPage,setVideogamesPerPage]= useState(9);
      var indexOfLastVideogame;
@@ -33,7 +34,6 @@ export default function Home() {
      }else{
       indexOfLastVideogame = currentPage * videogamesPerPage;
      }
-
      const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; 
      const currentVidegames = allVideogames.slice(indexOfFirstVideogame,indexOfLastVideogame)
      //console.log("mis actuales videojuegos",currentVidegames)  

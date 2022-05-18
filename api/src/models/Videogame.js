@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2000),
       allowNull: false,
     },
     platforms: {
@@ -27,6 +27,10 @@ module.exports = (sequelize) => {
     },
     released: {
       type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+    source: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
   });

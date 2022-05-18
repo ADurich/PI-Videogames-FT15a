@@ -10,7 +10,6 @@ export default function Paginado ({videogamesPerPage, allVideogames,paginado}) {
     const pageNumbers = [];
         for(let i=1; i<=Math.ceil(allVideogames / videogamesPerPage); i++){
             pageNumbers.push(i);
-            console.log(initialPageNumber)
         }
 
     const handleChange = (event: SelectChangeEvent,page:number) => {

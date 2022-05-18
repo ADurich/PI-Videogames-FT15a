@@ -69,33 +69,10 @@ function rootReducer(state = initialState, action) {
                         videogames: videogamesFiltered, 
                     }
 
-        case 'ORDER_BY_NAME':
-                let orderName = action.payload === 'asc' ?
-                    state.videogames.sort(function (a, b) {
-                        if (a.name > b.name) {
-                            return 1;
-                        }
-                        if (b.name > a.name) {
-                            return -1;
-                        }
-                        return 0;
-                    }) :
-                    state.videogames.sort(function (a, b) {
-                        if (a.name > b.name) {
-                            return -1;
-                        }
-                        if (b.name > a.name) {
-                            return 1;
-                        }
-                        return 0;
-                    })
-                return {
-                    ...state,
-                    videogames: orderName,
-                }
+        
         case "FILTER_CREATED":
                         //const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => !el.img||!el.img.includes('https://media.rawg.io/media/games')) : state.allVideogames.filter(el => )
-                        const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => el.description!=='Descripcion api') : state.allVideogames.filter(el => el.description==='Descripcion api')
+                        const orderCreated = action.payload === 'created' ? state.allVideogames.filter(el => el.source===null) : state.allVideogames.filter(el => el.source==='api')
                         return {                                                                              
                             ...state,
                             videogames: action.payload === 'all' ? state.allVideogames : orderCreated
@@ -127,7 +104,13 @@ function rootReducer(state = initialState, action) {
             return{
                 ...state, 
                 initialPageNumber:action.payload, 
-            }    
+            } 
+
+        case 'GET_ORDER':
+            return{
+                ...state, 
+                videogames:action.payload, 
+            }         
 
     	default:
     		return state;

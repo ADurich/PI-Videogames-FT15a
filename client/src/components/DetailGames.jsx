@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../actions/index";
+import { getDetail,getInitialPageNumber } from "../actions/index";
 import { useEffect } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -19,21 +19,36 @@ const dispatch = useDispatch()
 
 const myVideogame = useSelector((state) => state.details);
 
+function handleChangePageNumber(){
+      dispatch(getInitialPageNumber(1)); 
+   }
+
 return (
     <div>
         {myVideogame.map((el) => { 
           return (
-                <Card sx={{ mx: "auto",maxWidth:500,maxHeight:500}} key={el.id} >
+                <Card sx={{ mx: "auto",maxWidth:800,maxHeight:900}} key={el.id} >
                   <CardActionArea>
+                    {el.img!==""?
                     <CardMedia
-                      component="img"
-                      image={el.img}
-                      alt="image not found"
-                      sx={{mx:"auto",height:312}}
-                    />
+                        component="img"
+                        image={el.img}
+                        alt="image not found"
+                        sx={{mx:"auto",height:400}}
+                    />:
+                    <CardMedia
+                        component="img"
+                        image="https://www.publicdomainpictures.net/pictures/280000/nahled/not-found-image-15383864787lu.jpg"
+                        alt="image not found"
+                        sx={{mx:"auto",height:400}}
+                    />}                   
                     <CardContent id="cardContent">
                       <Typography gutterBottom variant="h5" component="div">
                         {el.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <b>Descripción: </b>
+                        {el.description}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <b>Géneros: </b>
@@ -46,9 +61,6 @@ return (
                         <b>Plataformas: </b>
                         {el.platforms.map((el)=>{return el+ ', '})}
                       </Typography>
-                      {/*<Typography variant="body2" color="text.secondary">
-                        {el.description}
-                      </Typography>*/}
                     </CardContent>
                   </CardActionArea>
                 </Card>
@@ -56,7 +68,7 @@ return (
          })}
         
         <Link to= '/home'>
-            <Button variant="contained">Volver</Button>
+            <Button variant="contained" onClick={handleChangePageNumber}>Volver al inicio</Button>
         </Link>
     </div>
 )}

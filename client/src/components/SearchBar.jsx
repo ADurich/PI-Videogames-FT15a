@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import { useDispatch } from "react-redux";
-import { getNameVideogames,getPageNumber } from '../actions';
+import { getNameVideogames,getPageNumber,getInitialPageNumber } from '../actions';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -54,6 +54,7 @@ export default function SearchBar (){
       name=e.target.value
       dispatch(getNameVideogames(name))
       dispatch(getPageNumber(1))
+      dispatch(getInitialPageNumber(1));
 
     }
     

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { orderByName,getPageNumber,getInitialPageNumber} from "../actions/index";
+import { getPageNumber,getInitialPageNumber,getOrder} from "../actions/index";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -16,7 +16,7 @@ export default function Order(){
 
     const handleChange = (event: SelectChangeEvent) => {
     	setOrder(event.target.value);
-    	dispatch(orderByName(event.target.value));
+    	dispatch(getOrder(event.target.value));
     	dispatch(getPageNumber(1))
     	dispatch(getInitialPageNumber(1))
     };
@@ -40,13 +40,13 @@ export default function Order(){
 		          <MenuItem value={"desc"}>Descendente</MenuItem>
 		        </Select>
 		      </FormControl>     
-		      <Box component="div" sx={{ display: 'block'}}>
-		      	<Link to={"/Home"}>
-			      	<Button variant="contained" color="success">
-			        	Cambiar
-			        </Button>
-		      	</Link>		      	
-		      </Box>  
+		      {/*<Box component="div" sx={{ display: 'block'}}>
+		        	<Link to={"/Home"}>
+		        		<Button variant="contained" color="success">
+		        			    Cambiar
+		        		</Button>
+		        	</Link>		      	
+		        </Box>*/}  
 	    </div>
   	)
 }
