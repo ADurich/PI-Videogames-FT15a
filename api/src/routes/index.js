@@ -90,6 +90,7 @@ router.get('/videogames',async(req,res)=>{
 	if(name){	
 
 		videogamesList.map(el=>{
+			el['make']  = 'Ford';
 			joinWords=[];
 			separateWords=el.name.split(" ");
 			numberOfWords=separateWords.length;
@@ -99,7 +100,7 @@ router.get('/videogames',async(req,res)=>{
 			for (let i=0; i<numberOfWords; i++) {
 				joinWords.push(separateWords.join(" "))
 				separateWords.shift();
-				if(joinWords[i].toLowerCase().startsWith(name.toLowerCase())&&!checkElement){
+				if(joinWords[i].toLowerCase().startsWith(name.toLowerCase())&&!checkElement){			
 					videogameName.push(el)
 					checkElement=true;
 				}
@@ -256,5 +257,46 @@ router.get('/order/:name',async(req,res)=>{
 	
 })
 
-module.exports = router;
+router.get('/videogamesPlatforms',async(req,res)=>{
+	const videogamesList=await getAllCharacters();
+	var allPlatforms=[];
+	var noRepeteadesPlatforms=[];
+	
+	videogamesList.map(el=>{
+		 el.platforms.map(platform=>{
+		 	allPlatforms.push(platform)
+		})
+	})
 
+    for(let i=0;i<allPlatforms.length;i++){
+    	if(noRepeteadesPlatforms.indexOf(allPlatforms[i])===-1){
+    		noRepeteadesPlatforms.push(allPlatforms[i])
+    	}
+    }
+
+	res.status(200).send(noRepeteadesPlatforms)
+	
+})
+
+router.get('/filteredPlatform/:name',async(req,res)=>{
+	const videogamesList=await getAllCharacters();
+	const name=req.params.name;
+	var filteredPlatforms=[];
+	
+	if(name==="all"){
+		res.status(200).send(videogamesList)
+	}else{
+
+		videogamesList.map(el=>{
+		 el.platforms.map(platform=>{
+		 	if(platform===name){
+		 		filteredPlatforms.push(el)
+		 	}
+		 })
+	})
+		res.status(200).send(filteredPlatforms)
+	}
+	
+})
+
+module.exports = router;

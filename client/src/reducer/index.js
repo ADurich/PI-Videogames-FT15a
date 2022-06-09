@@ -8,6 +8,8 @@ const initialState = {
     platforms: [],
     pageNumber:0,
     initialPageNumber:1,
+    backPageNumber:false,
+    videogamesPlatforms: [],
 };
 
 
@@ -106,11 +108,33 @@ function rootReducer(state = initialState, action) {
                 initialPageNumber:action.payload, 
             } 
 
+        case 'GET_BACK_PAGE_NUMBER':
+            return{
+                ...state, 
+                backPageNumber:action.payload, 
+            }    
+
         case 'GET_ORDER':
             return{
                 ...state, 
                 videogames:action.payload, 
-            }         
+            }  
+        case "GET_VIDEOGAMES_PLATFORMS":
+            const platformsNames=action.payload;
+
+            return{
+                ...state,
+                videogamesPlatforms:platformsNames,
+
+            }  
+        case "GET_FILTERED_PLATFORMS":
+            const filteredPlatforms=action.payload;
+
+            return{
+                ...state,
+                videogames:filteredPlatforms,
+
+            }             
 
     	default:
     		return state;

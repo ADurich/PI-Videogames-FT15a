@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames,getGenres,getPageNumber,getInitialPageNumber} from "../actions/index";
+import { getVideogames,getGenres,getPageNumber,getInitialPageNumber,getBackPage,getVideogamesPlatforms} from "../actions/index";
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
 import Genre from "./Genre";  
+import Platforms from "./Platforms"; 
 import Order from "./Order";
 import Base from "./Base";
 import Box from '@mui/material/Box';
@@ -19,11 +20,14 @@ export default function Home() {
 
      useEffect(() => {
        dispatch(getVideogames());
+       dispatch(getVideogamesPlatforms());
    }, []);
 
 //-------------------------------------------------------------
      const allVideogames=useSelector((state)=> state.videogames);
      var pageNumber=useSelector((state)=> state.pageNumber);
+     var backPageNumber=useSelector((state)=>state.backPageNumber)
+     var initialPageNumber=useSelector((state)=>state.initialPageNumber)
      console.log("mis videojuegos",allVideogames) 
 
      const [currentPage,setCurrentPage]= useState(1);
@@ -31,8 +35,12 @@ export default function Home() {
      var indexOfLastVideogame;
      if(pageNumber===1){
       indexOfLastVideogame = pageNumber * videogamesPerPage;
-     }else{
+     }
+     if(pageNumber!==1&&backPageNumber===false){
       indexOfLastVideogame = currentPage * videogamesPerPage;
+     }
+     if(backPageNumber===true){
+      indexOfLastVideogame = initialPageNumber * videogamesPerPage;
      }
      const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; 
      const currentVidegames = allVideogames.slice(indexOfFirstVideogame,indexOfLastVideogame)
@@ -48,6 +56,8 @@ export default function Home() {
     }
     setCurrentPage(page);
     dispatch(getInitialPageNumber(page))
+    dispatch(getBackPage(false))
+
   }; 
 
   return (
@@ -58,6 +68,8 @@ export default function Home() {
           <SearchBar />      
       {/*----------------GÉNEROS------------------------------------*/}    
           <Genre />
+      {/*----------------GÉNEROS------------------------------------*/}    
+          <Platforms />    
       {/*------------------ORDENAR---------------------------------*/}  
           <Order />  
       {/*-----------------CREADOS----------------------------------*/}    

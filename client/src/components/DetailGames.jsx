@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail,getInitialPageNumber } from "../actions/index";
+import { getDetail,getInitialPageNumber,getBackPage } from "../actions/index";
 import { useEffect } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -20,7 +20,8 @@ const dispatch = useDispatch()
 const myVideogame = useSelector((state) => state.details);
 
 function handleChangePageNumber(){
-      dispatch(getInitialPageNumber(1)); 
+      //dispatch(getInitialPageNumber(1)); 
+      dispatch(getBackPage(true));
    }
 
 return (
