@@ -26,6 +26,7 @@ export default function Genre(){
 
      const allGenres=useSelector((state)=> state.genres);
 
+
   return(
 
   		<div>

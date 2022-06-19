@@ -102,9 +102,9 @@ export default function Home() {
               </Box>:
               null} 
 
-              <footer>
+              {/*<footer>
                   &copy; 2022
-              </footer>             
+              </footer>*/}             
       </div>
   );
 }

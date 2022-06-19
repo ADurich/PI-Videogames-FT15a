@@ -48,8 +48,6 @@ router.get('/apidb',async(req,res)=>{
 
 			insertedVideogame.addGenre(genreDb);
 
-			contador++;
-
 			});
 
 	}
@@ -85,12 +83,10 @@ router.get('/videogames',async(req,res)=>{
 	var videogameName=[];
 	var joinWords;
 	var separateWords;
-	var separateWords2;
 	var checkElement;
 	if(name){	
 
 		videogamesList.map(el=>{
-			el['make']  = 'Ford';
 			joinWords=[];
 			separateWords=el.name.split(" ");
 			numberOfWords=separateWords.length;
@@ -131,8 +127,7 @@ router.get('/videogames',async(req,res)=>{
 
 		videogameName.length ?
 		res.status(200).send(videogameName):
-		videogameName=[];
-		res.status(200).send(videogameName)
+		res.status(200).send([])
 		//res.status(404).send("No está el personaje");	
 	}else{
 		res.status(200).send(videogamesList);
